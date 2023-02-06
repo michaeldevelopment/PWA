@@ -193,4 +193,24 @@ Before a service worker is inside a web app, it needs to be registered by the us
 3. If step 2 succeed, the install event is fired (just happens once)
 4. If step 3 succeed, the activate event is fired (nothing could happen next if the service worker is not activated)
 
+## Caching 
 
+Cache allows an app to be less dependant of network connection. The dev decide the best strategy for caching the resources will need. The service worker is the one who interacts with the Cache Storage API.
+
+**One advantage of managing your cache using service workers is that its lifecycle is not tied to the window, which means you are not blocking the main thread. Be aware that to use the Cache Storage API most of these contexts have to be under a TLS connection.**
+
+### What to cache?
+
+- The main page HTML (your app's start_url).
+- CSS stylesheets needed for the main user interface.
+- Images used in the user interface.
+- JavaScript files required to render the user interface.
+- Data, such as a JSON file, required to render a basic experience.
+- Web fonts.
+- On a multi-page application, other HTML documents that you want to serve fast or while offline.
+
+*Remember that you are downloading and storing assets on users' devices, so use that space and bandwidth responsibly. You need to find the balance between having enough on-device assets to render a fast or offline experience without consuming too much data.*
+
+**a PWA does not mean to have all its content offline. But at least, you need to make sure that your service worker can show an unique message of error when the app could not be loaded because of no connectivity, instead of relying on the web browser engine error message.** 
+
+*it is important to design your cache usage to provide a fast and reliable experience.*
